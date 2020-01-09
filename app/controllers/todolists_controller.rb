@@ -3,7 +3,7 @@ class TodolistsController < ApplicationController
   	#Viewへ渡すためのインスタンス変数に空のモデルオブジェクトを生成する
   	@list=List.new
   end
-
+  #投稿作成
   def create
   	#ストロングパラメーターを使用
   	list=List.new(list_params)
@@ -12,17 +12,23 @@ class TodolistsController < ApplicationController
   	#詳細画面へリダイレクト
   	redirect_to todolist_path(list.id)
   end
-
+  #投稿一覧
   def index
   	@lists=List.all
   end
-
+  #詳細
   def show
   	@list=List.find(params[:id])
   end
-
+  #編集
   def edit
   	@list=List.find(params[:id])
+  end
+  #投稿更新
+  def update
+  	list=List.find(params[:id])
+  	list.update(list_params)
+  	redirect_to todolist_path(list.id)
   end
 
   private
